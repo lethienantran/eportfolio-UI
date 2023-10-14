@@ -18,8 +18,8 @@ function App() {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<SignInPage />} />
-          <Route path="/SignUp" element={<SignUpPage />} />
+          <Route path="/SignIn" element={<SignInPage />} />
+          <Route path="/" element={<SignUpPage />} />
           <Route path="/Profile" element={<ProfilePage />} />
           <Route path="/EditProfile" element={<EditProfilePage />} />
           <Route path="/PostProject" element={<PostProjectPage/>} />
