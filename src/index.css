@@ -1,13 +1,50 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("./Fonts.css");
+
+/* Global Variables */
+:root {
+  /* Colors */
+  --Black: #000;
+  --White: #fff;
+  --Gray1: #D6D6D6;
+  --Gray2: #8D8D8D;
+  --Gray3: #EFEFEF;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  min-height: 100vh;
+  font-family: "Inter Regular";
+  font-size: calc(1.65vmin); /* 16px */
+  overflow: hidden;
+}
+
+.heading-1 {
+  font-family: "Inter Bold";
+  font-size: calc(3.35vmin); /* 32px */
+}
+
+.heading-2 {
+  font-family: "Inter Bold";
+  font-size: calc(2.5vmin); /* 24px */
+}
+
+.heading-3 {
+  font-family: "Inter Semi Bold";
+  font-size: calc(2.5vmin); /* 24px */
+}
+
+
+.paragraph-1 {
+  font-family: "Inter Regular";
+  font-size: calc(2.1vmin); /* 20px */
+}
+
+.paragraph-2 {
+  font-family: "Inter Regular";
+  font-size: calc(1.65vmin); /* 16px */
+}
+
+/* Global Stylings */
+.wrapper {
+  width: 100%;
+  height: 100vh;
 }
