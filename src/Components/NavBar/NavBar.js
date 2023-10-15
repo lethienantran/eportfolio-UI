@@ -29,8 +29,8 @@ function NavBar(props) {
               <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar'/>
             </div>
             <div className='NavBar-UserInformationContainer'>
-              <p className='heading-3 NavBar-UserName'>Walker Tran</p>
-              <p className='paragraph-1 NavBar-UserMajor'>Computer Science</p>
+              <p className='heading-3 NavBar-UserName'>{props.userFullName}</p>
+              <p className='paragraph-1 NavBar-UserMajor'>{props.userMajor}</p>
             </div>
           </div>
           <div className='NavBar-SearchBoxContainer'>

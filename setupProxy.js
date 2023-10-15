@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://2iok7z4zl8.execute-api.us-west-2.amazonaws.com/dev',
+      target: 'http://locahost:5000',
       changeOrigin: true,
     })
   );

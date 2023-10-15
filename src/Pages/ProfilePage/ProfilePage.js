@@ -9,8 +9,9 @@ import UserStatsButton from '../../Components/Buttons/UserStatsButton/UserStatsB
 
 import ProjectList from '../../Components/Lists/ProjectList';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-function ProfilePage() {
+function ProfilePage({ userData }) {
 
   const navigate = useNavigate();
 
@@ -22,9 +23,12 @@ function ProfilePage() {
 
   }
 
+
+
   return (
     <div className='wrapper ProfilePage-Wrapper'>
-      <NavBar />
+      <NavBar userFullName={userData.fullname}
+              userMajor={userData.major} />
       <div className='ProfilePage-ContentContainer'>
         <div className='ProfilePage-Content'>
           <div className='ProfilePage-ProfileHeader'>
@@ -32,12 +36,12 @@ function ProfilePage() {
               <ProfileAvatar userClassName='ProfilePage-UserAvatar' defaultClassName='ProfilePage-DefaultUserAvatar' />
             </div>
             <div className='ProfilePage-UserFullNameContainer'>
-              <p className='heading-3 ProfilePage-UserFullName'>Walker Tran</p>
+              <p className='heading-3 ProfilePage-UserFullName'>{userData.fullname}</p>
               <IconButton icon={faPen} className='ProfilePage-EditProfile' onClick={() => {navigate('/EditProfile')}}/>
             </div>
             <div className='ProfilePage-UserInformationContainer'>
-              <p className='paragraph-1 ProfilePage-UserMajor'>Computer Science</p>
-              <p className='paragraph-1 ProfilePage-UserSchool'>@ Seattle Pacific University</p>
+              <p className='paragraph-1 ProfilePage-UserMajor'>{userData.major}</p>
+              <p className='paragraph-1 ProfilePage-UserSchool'>@ {userData.school}</p>
             </div>
           </div>
           <div className='ProfilePage-ProfileSocialStats'>
@@ -52,4 +56,8 @@ function ProfilePage() {
   )
 }
 
-export default ProfilePage
+const mapStateToProps = state => ({
+  userData: state.user.userData,
+});
+
+export default connect(mapStateToProps)(ProfilePage)

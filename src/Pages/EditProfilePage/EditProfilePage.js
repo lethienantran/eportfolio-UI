@@ -18,19 +18,21 @@ function EditProfilePage() {
 
   //populate
   const [userInformation, setUserInformation] = useState ({
-    avatar: '',
-    fullName: '',
+    encodePhoto: '',
+    fullname: '',
     major: '',
     school: '',
-    emailAddress: '',
+    email: '',
   });
 
   const requestBody = {
-    avatar: userInformation.avatar,
-    fullName: userInformation.fullName,
+    encodePhoto: userInformation.encodePhoto,
+    fullName: userInformation.fullname,
     major: userInformation.major,
     school: userInformation.school,
-    emailAddress: userInformation.emailAddress,
+    email: userInformation.email,
+    photoOGWidth: '',
+    photoOGHeight: '',
   };
 
   const HandleInputChange = (propertyName, inputValue) => {
@@ -48,8 +50,8 @@ function EditProfilePage() {
   }
 
   const IsValid = () => {
-    if (!userInformation.fullName || !userInformation.major
-      || !userInformation.school || !userInformation.emailAddress) {
+    if (!userInformation.encodePhoto || !userInformation.fullname || !userInformation.major
+      || !userInformation.school || !userInformation.email) {
       setIsError(true);
       setErrorMessage('All fields are required.');
       return false;
@@ -74,7 +76,7 @@ function EditProfilePage() {
         )}
           <div className='EditProfilePage-EditForm'>
             <StandardTextInputField placeholder='Full Name'
-                                    name='fullName'
+                                    name='fullname'
                                     onChange={HandleInputChange}/>
             <StandardTextInputField placeholder='Major'
                                     name='major'
@@ -83,7 +85,7 @@ function EditProfilePage() {
                                     name='school'
                                     onChange={HandleInputChange}/>
             <StandardTextInputField placeholder='Email Address'
-                                    name='emailAddress'
+                                    name='email'
                                     onChange={HandleInputChange}/>
           </div>
 

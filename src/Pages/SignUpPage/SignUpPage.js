@@ -7,6 +7,9 @@ import StandardButton from '../../Components/Buttons/StandardButton/StandardButt
 import './SignUpPage.css';
 import { useNavigate } from 'react-router-dom';
 
+import { API } from '../../Constants';
+import axios from 'axios';
+
 function SignUpPage() {
 
   const navigate = useNavigate();
@@ -16,8 +19,8 @@ function SignUpPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [userInformation, setUserInformation] = useState ({
-    emailAddress: '',
-    fullName: '',
+    userEmail: '',
+    fullname: '',
     school: '',
     major: '',
     username: '',
@@ -25,8 +28,8 @@ function SignUpPage() {
   });
 
   const requestBody = {
-    emailAddress: userInformation.emailAddress,
-    fullName: userInformation.fullName,
+    userEmail: userInformation.userEmail,
+    fullname: userInformation.fullname,
     school: userInformation.school,
     major: userInformation.major,
     username: userInformation.username,
@@ -42,13 +45,24 @@ function SignUpPage() {
 
   const OnSignUp = () => {
     if(IsValid()) {
-      console.log(requestBody);
-      navigate('/');
+      axios
+        .post(API.signUpURL, requestBody, {
+          headers: {
+            'X-API-KEY': API.key,
+          },
+        })
+        .then(response => {
+          navigate('/');
+        })
+        .catch(error => {
+          setIsError(true);
+          setErrorMessage(error.response.data.message);
+        })
     }
   }
 
   const IsValid = () => {
-    if (!userInformation.emailAddress || !userInformation.fullName || !userInformation.school || !userInformation.major || !userInformation.username || !userInformation.password) {
+    if (!userInformation.userEmail || !userInformation.fullname || !userInformation.school || !userInformation.major || !userInformation.username || !userInformation.password) {
       setIsError(true);
       setErrorMessage('All fields are required.')
       return false;
@@ -77,10 +91,10 @@ function SignUpPage() {
         <div className='SignUpPage-InputFieldsContainer'>
           <StandardTextInputField placeholder='Email Address' 
                                   type='email'
-                                  name='emailAddress'
+                                  name='userEmail'
                                   onChange={HandleInputChange} />
           <StandardTextInputField placeholder='Full Name'
-                                  name='fullName'
+                                  name='fullname'
                                   onChange={HandleInputChange} />
           <StandardTextInputField placeholder='School/University'
                                   name='school' 

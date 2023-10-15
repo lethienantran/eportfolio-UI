@@ -8,9 +8,16 @@ import StandardButton from '../../Components/Buttons/StandardButton/StandardButt
 import Logo from '../../Components/Logo/Logo';
 import { useNavigate } from 'react-router-dom';
 
+import axios from 'axios';
+
+import { API } from '../../Constants';
+import { connect, useDispatch } from 'react-redux';
+import { setUserData } from '../../storage';
+
 function SignInPage() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [isError, setIsError] = useState(false);
   
@@ -39,8 +46,21 @@ function SignInPage() {
 
   const OnSignIn = () => {
     if(IsValid()){
-      console.log(requestBody);
-      navigate('/Profile');
+      axios
+        .post(API.signInURL, requestBody, {
+          headers: {
+            'X-API-KEY': API.key,
+          },
+        })
+        .then(response => {
+          const userData = response.data.responseObject;
+          dispatch(setUserData(userData));
+          navigate('/Profile');
+        })
+        .catch(error => {
+          setIsError(true);
+          setErrorMessage(error.response.data.message);
+        })
     }
   }
 
@@ -83,4 +103,4 @@ function SignInPage() {
   )
 }
 
-export default SignInPage 
+export default connect()(SignInPage)
