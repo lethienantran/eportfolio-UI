@@ -3,3 +3,84 @@
     flex-direction: row;
 }
 
+.ProfilePage-ContentContainer {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ProfilePage-Content {
+    width: 592px;
+    display:flex;
+    flex-direction: column;
+}
+
+.ProfilePage-ProfileHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfilePage-UserAvatarContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: calc(1.65vmin); /* 16px */
+}
+
+.ProfilePage-UserAvatar {
+    width: 200px; /* 200px */
+    height: 200px; /* 200px */
+}
+
+.ProfilePage-DefaultUserAvatar {
+    width: 200px; /* 200px */
+    height: 200px; /* 200px */
+    font-size: 100px;
+}
+
+.ProfilePage-UserFullNameContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: calc(1.65vmin); /* 16px */
+}
+
+.ProfilePage-UserFullName {
+    margin-left: 40px;
+    text-align: center;
+}
+
+.ProfilePage-EditProfile {
+    font-size: calc(2.1vmin); 
+    margin-left: 12px;
+}
+
+.ProfilePage-UserInformationContainer {
+    margin-bottom: calc(3.35vmin); /* 32px */
+}
+
+.ProfilePage-UserMajor {
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.ProfilePage-UserSchool {
+    text-align: center;
+    margin-top: 4px;
+}
+
+.ProfilePage-ProfileSocialStats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.ProfilePage-ProjectListContainer {
+    flex: 1;
+    margin-top: calc(2.5vmin); /* 24px */
+}
+

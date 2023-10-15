@@ -1,7 +1,6 @@
 .IconButton-Container{
     border:none;
     background: transparent;
-    font-size: calc(3.35vmin); /* 32px */
 }
 
 .IconButton-Container:hover {

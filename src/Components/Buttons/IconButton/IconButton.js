@@ -5,8 +5,9 @@ import './IconButton.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function IconButton(props) {
+  const className = `${props.className} IconButton-Container`
   return (
-    <button className='IconButton-Container' onClick={props.onClick}>
+    <button className={className} onClick={props.onClick}>
         <FontAwesomeIcon icon={props.icon} />
     </button>
   )

@@ -1,0 +1,11 @@
+.ProjectList-Container {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.ProjectList-Container::-webkit-scrollbar {
+    display: none;
+}

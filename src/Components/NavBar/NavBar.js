@@ -7,29 +7,18 @@ import Logo from '../../Components/Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightFromBracket, faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import { faBell, faIdBadge, faSquarePlus, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faBell, faIdBadge, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import NavBarButton from '../Buttons/NavBarButton/NavBarButton';
 import IconButton from '../Buttons/IconButton/IconButton';
+import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 
-function NavBar() {
-  const [userAvatarBase64, setUserAvatarBase64] = useState('');
+function NavBar(props) {
   return (
     <div className='NavBar-Container'>
         <div className='NavBar-TopContainer'>
           <div className='NavBar-UserProfileContainer'>
             <div className='NavBar-UserAvatarContainer'>
-              {userAvatarBase64 ? 
-                (<>
-                  <img src={`data:image/jpeg;base64,${userAvatarBase64}
-  `} alt='User Avatar'className='NavBar-UserAvatar'/>
-              </>)
-              : (
-                <>
-                  <div className='NavBar-DefaultUserAvatar'>
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                </>
-              )}
+              <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar'/>
             </div>
             <div className='NavBar-UserInformationContainer'>
               <p className='heading-3 NavBar-UserName'>Walker Tran</p>
@@ -49,7 +38,7 @@ function NavBar() {
             <Logo className='NavBar-Logo'/>
             <p className='paragraph-2'><em>"Projects by Peers, Passion in Progress."</em></p>
           </div>
-          <IconButton icon={faArrowRightFromBracket}/>
+          <IconButton icon={faArrowRightFromBracket} className='NavBar-SignOut'/>
         </div>
     </div>
   )
