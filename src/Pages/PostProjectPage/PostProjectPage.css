@@ -44,3 +44,11 @@
     font-size: calc(12.5vmin); /* 120px */
     color: var(--Gray2);
 }
+
+.PostProjectPage-UploadedPhoto {
+    object-fit: cover;
+    object-position: center center;
+    border-radius: calc(1vmin);
+    width: calc(25.2vmin); /* 240px */
+    height: calc(25.2vmin); /* 240px */
+}
