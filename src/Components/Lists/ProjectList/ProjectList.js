@@ -10,8 +10,8 @@ function ProjectList(props) {
 
   const navigate = useNavigate();
 
-  const OnNavigateProject = () => {
-    navigate('/Project');
+  const OnNavigateProject = (projectId) => {
+    navigate('/Project', {state: { projectId }});
   }
 
   return (
@@ -24,7 +24,7 @@ function ProjectList(props) {
         (props.ProjectListsData?.map(project => (
           <ProjectCard key={project.projectId} 
                        photo={project.projectPhoto}
-                       onClick={OnNavigateProject}/>
+                       onClick={() => OnNavigateProject(project.projectId)}/>
           )
         ))}
     </div>
