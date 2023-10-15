@@ -30,7 +30,7 @@ function NavBar(props) {
             </div>
             <div className='NavBar-UserInformationContainer'>
               <p className='heading-3 NavBar-UserName'>{props.userFullName}</p>
-              <p className='paragraph-1 NavBar-UserMajor'>{props.userMajor}</p>
+              <p className='paragraph-2 NavBar-UserMajor'>{props.userMajor}</p>
             </div>
           </div>
           <div className='NavBar-SearchBoxContainer'>

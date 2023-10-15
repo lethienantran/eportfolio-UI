@@ -7,10 +7,16 @@ import StandardTextInputField from '../../Components/InputFields/StandardTextInp
 import StandardButton from '../../Components/Buttons/StandardButton/StandardButton';
 
 import { useNavigate } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
 
-function EditProfilePage() {
+import axios from 'axios';
+import { API } from '../../Constants';
+import { setUserData } from '../../storage';
+
+function EditProfilePage({ userData }) {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [isError, setIsError] = useState(false);
   
@@ -18,22 +24,13 @@ function EditProfilePage() {
 
   //populate
   const [userInformation, setUserInformation] = useState ({
-    encodePhoto: '',
-    fullname: '',
-    major: '',
-    school: '',
-    email: '',
-  });
+    encodePhoto: userData.userImage,
+    fullname: userData.fullname,
+    major: userData.major,
+    school: userData.school,
+    email: userData.email,
 
-  const requestBody = {
-    encodePhoto: userInformation.encodePhoto,
-    fullName: userInformation.fullname,
-    major: userInformation.major,
-    school: userInformation.school,
-    email: userInformation.email,
-    photoOGWidth: '',
-    photoOGHeight: '',
-  };
+  });
 
   const HandleInputChange = (propertyName, inputValue) => {
     if (isError) {
@@ -44,13 +41,45 @@ function EditProfilePage() {
 
   const OnUpdate = () => {
     if (IsValid()) {
+      const requestBody = {
+        userId: userData.userId,
+        encodePhoto: userInformation.encodePhoto,
+        fullname: userInformation.fullname,
+        major: userInformation.major,
+        school: userInformation.school,
+        email: userInformation.email,
+        photoOGWidth: '',
+        photoOGHeight: '',
+      };
       console.log(requestBody);
-      navigate('/Profile');
+      axios
+        .put(API.editUserInformationURL, requestBody, {
+          headers: {
+            'X-API-KEY': API.key,
+          },
+        })
+        .then(response => {
+          const newUserData = {
+            userId: userData.userId,
+            fullname: requestBody.fullname,
+            major: requestBody.major,
+            school: requestBody.school,
+            userImage: requestBody.encodePhoto,
+            email: requestBody.email,
+            username: userData.username,
+          }
+          dispatch(setUserData(newUserData));
+          navigate('/Profile');
+        })
+        .catch(error => {
+          setIsError(true);
+          setErrorMessage(error.response.data.message);
+        })
     }
   }
 
   const IsValid = () => {
-    if (!userInformation.encodePhoto || !userInformation.fullname || !userInformation.major
+    if (!userInformation.fullname || !userInformation.major
       || !userInformation.school || !userInformation.email) {
       setIsError(true);
       setErrorMessage('All fields are required.');
@@ -77,16 +106,20 @@ function EditProfilePage() {
           <div className='EditProfilePage-EditForm'>
             <StandardTextInputField placeholder='Full Name'
                                     name='fullname'
-                                    onChange={HandleInputChange}/>
+                                    onChange={HandleInputChange}
+                                    value={userInformation.fullname}/>
             <StandardTextInputField placeholder='Major'
                                     name='major'
-                                    onChange={HandleInputChange}/>
+                                    onChange={HandleInputChange}
+                                    value={userInformation.major}/>
             <StandardTextInputField placeholder='School/University'
                                     name='school'
-                                    onChange={HandleInputChange}/>
+                                    onChange={HandleInputChange}
+                                    value={userInformation.school}/>
             <StandardTextInputField placeholder='Email Address'
                                     name='email'
-                                    onChange={HandleInputChange}/>
+                                    onChange={HandleInputChange}
+                                    value={userInformation.email}/>
           </div>
 
           <StandardButton title='Update' onClick={OnUpdate} className='EditProfilePage-Update'/>
@@ -96,4 +129,7 @@ function EditProfilePage() {
   )
 }
 
-export default EditProfilePage
+const mapStateToProps = state => ({
+  userData: state.user.userData,
+});
+export default connect(mapStateToProps)(EditProfilePage)

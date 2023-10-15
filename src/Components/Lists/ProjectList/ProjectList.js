@@ -16,11 +16,17 @@ function ProjectList(props) {
 
   return (
     <div className={className}>
-        <ProjectCard onClick={OnNavigateProject}/>
-        <ProjectCard onClick={OnNavigateProject}/>
-        <ProjectCard onClick={OnNavigateProject}/>
-        <ProjectCard onClick={OnNavigateProject}/>
-        <ProjectCard onClick={OnNavigateProject}/>
+        {props.ProjectListsData?.length === 0 ? (
+          <>
+            <p className='paragraph1'>There is no project yet!</p>
+          </>
+        ) : 
+        (props.ProjectListsData?.map(project => (
+          <ProjectCard key={project.projectId} 
+                       photo={project.projectPhoto}
+                       onClick={OnNavigateProject}/>
+          )
+        ))}
     </div>
   )
 }
