@@ -52,3 +52,12 @@
     width: calc(25.2vmin); /* 240px */
     height: calc(25.2vmin); /* 240px */
 }
+
+.PostProjectPage-UploadedPhoto:hover {
+    cursor: pointer;
+}
+
+.PostProjectPage-ErrorMessage {
+    margin-bottom: calc(1.65vmin);
+    color: var(--Red1);
+}

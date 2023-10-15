@@ -13,7 +13,9 @@ import IconButton from '../Buttons/IconButton/IconButton';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import { useNavigate } from 'react-router-dom';
 
-function NavBar(props) {
+import { connect } from 'react-redux';
+
+function NavBar({ userData }) {
 
   const navigate = useNavigate();
 
@@ -29,8 +31,8 @@ function NavBar(props) {
               <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar'/>
             </div>
             <div className='NavBar-UserInformationContainer'>
-              <p className='heading-3 NavBar-UserName'>{props.userFullName}</p>
-              <p className='paragraph-2 NavBar-UserMajor'>{props.userMajor}</p>
+              <p className='heading-3 NavBar-UserName'>{userData?.fullname}</p>
+              <p className='paragraph-2 NavBar-UserMajor'>{userData?.major}</p>
             </div>
           </div>
           <div className='NavBar-SearchBoxContainer'>
@@ -52,4 +54,8 @@ function NavBar(props) {
   )
 }
 
-export default NavBar
+const mapStateToProps = state => ({
+  userData: state.user.userData,
+});
+
+export default connect(mapStateToProps)(NavBar)

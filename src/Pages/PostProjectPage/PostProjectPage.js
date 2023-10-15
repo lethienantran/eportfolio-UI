@@ -11,8 +11,11 @@ import StandardTextInputField from '../../Components/InputFields/StandardTextInp
 import StandardTextAreaInputField from '../../Components/InputFields/StandardTextAreaInputField/StandardTextAreaInputField';
 
 import { connect } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 function PostProjectPage({ userData }) {
+
+  const navigate = useNavigate();
+
   const fileInputRef = useRef(null);
   const [imageBase64, setImageBase64] = useState(null); // State to store the base64 image data
   const [imageOGWidth, setImageOGWidth] = useState(null);
@@ -31,12 +34,6 @@ function PostProjectPage({ userData }) {
     projectDescription: '',
   });
 
-  const requestBody = {
-    projectTitle: projectInformation.projectTitle,
-    collaborators: projectInformation.collaborators,
-    projectDescription: projectInformation.projectDescription,
-  };
-
   const handleFileInputChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -45,8 +42,7 @@ function PostProjectPage({ userData }) {
       reader.onload = (event) => {
         const img = new Image();
         img.src = event.target.result;
-        setImageOGHeight(img.height);
-        setImageOGWidth(img.width);
+
         img.onload = () => {
           const canvas = document.createElement('canvas');
           let newWidth = img.width;
@@ -61,7 +57,8 @@ function PostProjectPage({ userData }) {
               newWidth = (img.width / img.height) * maxHeight;
             }
           }
-  
+          setImageOGHeight(img.height);
+          setImageOGWidth(img.width);
           canvas.width = newWidth;
           canvas.height = newHeight;
   
@@ -100,9 +97,11 @@ function PostProjectPage({ userData }) {
       .then((response) => {
         // Handle the response from the API, e.g., show a success message or perform further actions
         console.log(requestBody);
+        navigate('/Project');
       })
       .catch((error) => {
-        // Handle any errors that occur during the request
+        setIsError(true);
+        setErrorMessage(error.response.data.message);
         console.error('API request error:', error.response.data.message);
       });
   };
@@ -130,11 +129,16 @@ function PostProjectPage({ userData }) {
             />
             {imageBase64 === null ? (<IconButton icon={faImage} className='PostProjectPage-UploadPhoto'onClick={openFileDialog}/>) : (
               <div className='PostProjectPage-UploadPhotoContainer' onClick={openFileDialog}>
-                <img src={imageBase64} className='PostProjectPage-UploadedPhoto'/>
+                <img src={imageBase64} className='PostProjectPage-UploadedPhoto' alt='Uploaded Project Banner'/>
               </div>
             )}
             
           </div>
+          {isError && (
+          <>
+            <p className='paragraph-2 PostProjectPage-ErrorMessage'>{errorMessage}</p>
+          </>
+        )}
           <div className='PostProjectPage-Form'>
             <StandardTextInputField placeholder='Project Title' 
                                     onChange={HandleInputChange} 
