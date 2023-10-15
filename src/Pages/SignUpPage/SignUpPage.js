@@ -68,6 +68,11 @@ function SignUpPage() {
         <Logo className='SignUpPage-Logo'/>
         <div className='SignUpPage-HeadlineContainer'>
           <p className='paragraph-2'>Sign up to showcase and catch up with other projects by your peers!</p>
+          {isError && (
+          <>
+            <p className='paragraph-2 SignUpPage-ErrorMessage'>{errorMessage}</p>
+          </>
+        )}
         </div>
         <div className='SignUpPage-InputFieldsContainer'>
           <StandardTextInputField placeholder='Email Address' 
@@ -91,11 +96,6 @@ function SignUpPage() {
                                   name='password'
                                   onChange={HandleInputChange}/>
         </div>
-        {isError && (
-          <>
-            <p className='paragraph-2 SignUpPage-ErrorMessage'>{errorMessage}</p>
-          </>
-        )}
         <div className='SignUpPage-PromptContainer'>
           <p className='paragraph-2'>Already have an account?</p>
           <StandardTextButton text='Sign In' onClick={() => {navigate('/')}}/>

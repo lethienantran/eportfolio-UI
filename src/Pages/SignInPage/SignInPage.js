@@ -58,6 +58,11 @@ function SignInPage() {
     <div className='wrapper SignInPage-Wrapper'>
       <div className='SignInPage-FormContainer'>
         <Logo className='SignInPage-Logo'/>
+        {isError && (
+          <>
+            <p className='paragraph-2 SignInPage-ErrorMessage'>{errorMessage}</p>
+          </>
+        )}
         <div className='SignInPage-InputFieldsContainer'>
           <StandardTextInputField placeholder='Username' 
                                   name='username'
@@ -67,11 +72,7 @@ function SignInPage() {
                                   type='password'
                                   onChange={HandleInputChange}/>
         </div>
-        {isError && (
-          <>
-            <p className='paragraph-2 SignInPage-ErrorMessage'>{errorMessage}</p>
-          </>
-        )}
+
         <div className='SignInPage-PromptContainer'>
             <p className='paragraph-2'>Don't have an account?</p>
             <StandardTextButton text='Sign Up' onClick={NavigateSignUp}/>

@@ -31,6 +31,6 @@
 }
 
 .SignInPage-ErrorMessage {
-    margin-top: calc(1.65vmin);
+    margin-bottom: calc(1.65vmin);
     color: var(--Red1);
 }
