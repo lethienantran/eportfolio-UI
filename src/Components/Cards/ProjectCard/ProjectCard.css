@@ -1,7 +1,11 @@
 .ProjectCard-Container {
-    width: 220px; /* 200px */
-    height: 220px; /* 200px */
-    margin-bottom: calc(3.35vmin)
+    width: calc(23vmin); /* 220px */
+    height: calc(23vmin); /* 220px */
+    margin-bottom: calc(3.35vmin);
+    margin-left: calc(1.65vmin);
+    margin-right: calc(1.65vmin);
+    border: none;
+    background:transparent;
 }
 
 .ProjectCard-Container:last-child, 
@@ -15,4 +19,8 @@
     border-radius: calc(1vmin);
     object-fit: cover;
     object-position: center center;
+}
+
+.ProjectCard-Container:hover {
+    cursor: pointer;
 }

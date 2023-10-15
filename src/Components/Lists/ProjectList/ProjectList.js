@@ -8,10 +8,10 @@ function ProjectList(props) {
   const className = `${props.className} ProjectList-Container`;
   return (
     <div className={className}>
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        <ProjectCard onClick={()=>{}}/>
+        <ProjectCard onClick={()=>{}}/>
+        <ProjectCard onClick={()=>{}}/>
+        <ProjectCard onClick={()=>{}}/>
     </div>
   )
 }

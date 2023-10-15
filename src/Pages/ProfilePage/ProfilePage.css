@@ -5,14 +5,14 @@
 
 .ProfilePage-ContentContainer {
     flex: 1;
-    padding: 24px;
+    padding: calc(2.5vmin);
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
 .ProfilePage-Content {
-    width: 592px;
+    width: calc(53vmin); /* 592px */
     display:flex;
     flex-direction: column;
 }
@@ -32,30 +32,39 @@
 }
 
 .ProfilePage-UserAvatar {
-    width: 200px; /* 200px */
-    height: 200px; /* 200px */
+    width: calc(21vmin); /* 200px */
+    height: calc(21vmin); /* 200px */
 }
 
 .ProfilePage-DefaultUserAvatar {
-    width: 200px; /* 200px */
-    height: 200px; /* 200px */
-    font-size: 100px;
+    width: calc(21vmin); /* 200px */
+    height: calc(21vmin); /* 200px */
+    font-size: calc(10.5vmin); /* 100px */
 }
 
 .ProfilePage-UserFullNameContainer {
     display: flex;
     flex-direction: row;
     margin-bottom: calc(1.65vmin); /* 16px */
+    width: calc(52.25vmin); /* 500px */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
 }
 
 .ProfilePage-UserFullName {
-    margin-left: 40px;
+    margin-left: calc(4.15vmin); /* 40px */
     text-align: center;
+    max-width: calc(52.25vmin); /* 500px */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .ProfilePage-EditProfile {
     font-size: calc(2.1vmin); 
-    margin-left: 12px;
+    margin-left: calc(1.25vmin); /* 12px */
 }
 
 .ProfilePage-UserInformationContainer {
@@ -64,12 +73,12 @@
 
 .ProfilePage-UserMajor {
     text-align: center;
-    margin-bottom: 4px;
+    margin-bottom: calc(0.4vmin); /* 4px */
 }
 
 .ProfilePage-UserSchool {
     text-align: center;
-    margin-top: 4px;
+    margin-top: calc(0.4vmin); /* 4px */
 }
 
 .ProfilePage-ProfileSocialStats {

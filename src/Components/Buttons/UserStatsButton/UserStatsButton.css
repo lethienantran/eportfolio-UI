@@ -9,9 +9,9 @@
 }
 
 .UserStatsButton-StatsCounter {
-    margin-bottom: 4px;
+    margin-bottom: calc(0.4vmin); /* 4px */
 }
 
 .UserStatsButton-StatsTitle {
-    margin-top: 4px;
+    margin-top: calc(0.4vmin); /* 4px */
 }
