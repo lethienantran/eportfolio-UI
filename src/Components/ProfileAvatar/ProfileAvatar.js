@@ -12,15 +12,14 @@ function ProfileAvatar(props) {
   const userClassName = `${props.userClassName} ProfileAvatar-User`;
   const defaultClassName = `${props.defaultClassName} ProfileAvatar-Default`  
 
-  const [userAvatarBase64, setUserAvatarBase64] = useState('');
+  const userAvatarBase64 = props.userAvatarBase64;
   
   return (
     <>
         {userAvatarBase64 ? 
         (<>
           <button className='ProfileAvatar-Container' onClick={props.onClick}>
-            <img src={`data:image/jpeg;base64,${userAvatarBase64}
-`} alt='User Avatar'className={userClassName} />
+            <img src={userAvatarBase64} alt='User Avatar'className={userClassName} />
           </button>
       </>)
       : (

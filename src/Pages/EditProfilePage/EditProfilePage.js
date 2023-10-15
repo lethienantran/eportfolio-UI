@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import './EditProfilePage.css';
 import NavBar from '../../Components/NavBar/NavBar';
@@ -14,6 +14,13 @@ import { API } from '../../Constants';
 import { setUserData } from '../../storage';
 
 function EditProfilePage({ userData }) {
+  const fileInputRef = useRef(null);
+  const [imageOGWidth, setImageOGWidth] = useState(null);
+  const [imageOGHeight, setImageOGHeight] = useState(null);
+  const [userAvatarBase64, setUserAvatarBase64] = useState(null);
+
+  const maxWidth = 240; 
+  const maxHeight = 240; 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,13 +31,65 @@ function EditProfilePage({ userData }) {
 
   //populate
   const [userInformation, setUserInformation] = useState ({
-    encodePhoto: userData.userImage,
+    encodePhoto: userAvatarBase64,
+    photoOGHeight: null,
+    photoOGWidth: null,
     fullname: userData.fullname,
     major: userData.major,
     school: userData.school,
     email: userData.email,
 
   });
+
+  const HandleFileInputChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      const img = new Image();
+  
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let newWidth = img.width;
+        let newHeight = img.height;
+  
+        if (img.width > maxWidth || img.height > maxHeight) {
+          if (img.width / maxWidth > img.height / maxHeight) {
+            newWidth = maxWidth;
+            newHeight = (img.height / img.width) * maxWidth;
+          } else {
+            newHeight = maxHeight;
+            newWidth = (img.width / img.height) * maxHeight;
+          }
+        }
+        const ogHeight = img.height;
+        const ogWidth = img.width;
+        setImageOGHeight(ogHeight);
+        setImageOGWidth(ogWidth);
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+  
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+  
+        const base64Data = canvas.toDataURL('image/jpeg', 0.7); // Use 'image/jpeg' for JPEG format
+        setUserInformation({ ...userInformation, encodePhoto: base64Data });
+        setUserAvatarBase64(base64Data);
+
+      };
+  
+      reader.onload = (event) => {
+        img.src = event.target.result;
+      };
+  
+      reader.readAsDataURL(selectedFile);
+    }
+  };
+  
+  
+
+  const OpenFileDialog = () => {
+    fileInputRef.current.click();
+  };
 
   const HandleInputChange = (propertyName, inputValue) => {
     if (isError) {
@@ -48,8 +107,8 @@ function EditProfilePage({ userData }) {
         major: userInformation.major,
         school: userInformation.school,
         email: userInformation.email,
-        photoOGWidth: '',
-        photoOGHeight: '',
+        photoOGWidth: imageOGWidth,
+        photoOGHeight: imageOGHeight,
       };
       console.log(requestBody);
       axios
@@ -96,7 +155,16 @@ function EditProfilePage({ userData }) {
         <div className='EditProfilePage-Content'>
           <p className='heading-1 EditProfilePage-Title'>Edit Profile</p>
           <div className='EditProfilePage-UserAvatarContainer'>
-              <ProfileAvatar userClassName='EditProfilePage-UserAvatar' defaultClassName='EditProfilePage-DefaultUserAvatar' />
+            <label className="EditProfilePage-UserAvatarContainer" onClick={OpenFileDialog}>
+              <ProfileAvatar userClassName='EditProfilePage-UserAvatar' defaultClassName='EditProfilePage-DefaultUserAvatar' userAvatarBase64={userAvatarBase64}/>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={HandleFileInputChange}
+              />
+            </label>
           </div>
           {isError && (
           <>
