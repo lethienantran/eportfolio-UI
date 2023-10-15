@@ -85,6 +85,10 @@ function PostProjectPage({ userData }) {
     fileInputRef.current.click();
   };
 
+  const NavigateProfile = (userId) => {
+    navigate('/Profile', {state: {userId}})
+  }
+
   const handlePostButtonClick = () => {
     // Prepare the request body
     const requestBody = {
@@ -103,7 +107,7 @@ function PostProjectPage({ userData }) {
       .then((response) => {
         // Handle the response from the API, e.g., show a success message or perform further actions
         console.log(requestBody);
-        navigate("/Profile");
+        NavigateProfile(userData?.userId);
       })
       .catch((error) => {
         setIsError(true);

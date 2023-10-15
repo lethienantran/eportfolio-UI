@@ -4,7 +4,7 @@ import './ProfilePage.css';
 import NavBar from '../../Components/NavBar/NavBar';
 import ProfileAvatar from '../../Components/ProfileAvatar/ProfileAvatar';
 import IconButton from '../../Components/Buttons/IconButton/IconButton';
-import { faPen, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faPen, faUserCheck, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import UserStatsButton from '../../Components/Buttons/UserStatsButton/UserStatsButton';
 
 import ProjectList from '../../Components/Lists/ProjectList';
@@ -45,7 +45,7 @@ function ProfilePage({ userData }) {
         }
       })
       .then(response => {
-
+        window.location.reload();
       })
       .catch(error => {
         console.log(error);
@@ -53,7 +53,23 @@ function ProfilePage({ userData }) {
   }
 
   const OnUnfollowClicked = () => {
-
+    const followId = GetFollowIdForCurrentUser();
+    if (!followId) {
+      console.log('Follow ID not found for the current user');
+      return;
+    }
+    axios
+      .delete(`/api/follow/${followId}/unfollow`, {
+        headers: {
+          'X-API-KEY': API.key,
+        }
+      })
+      .then(response => {
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   useEffect(()=> {
@@ -66,7 +82,6 @@ function ProfilePage({ userData }) {
       .then(response => {
         const JSONFormat = JSON.stringify(response.data.responseObject);
         setUserProfileData(JSON.parse(JSONFormat));
-        console.log(userProfileData);
       })
   }, [apiURL]);
 
@@ -75,7 +90,12 @@ function ProfilePage({ userData }) {
   }, [userProfileData]);
 
   const IsAlreadyFollowed = () => {
-    return userProfileData.userFollowers.some(follower => follower.userId === userData?.userId);
+    return userProfileData?.userFollowers?.some(follower => follower.userId === userData?.userId);
+  }
+
+  const GetFollowIdForCurrentUser = () => {
+    const followData = userProfileData?.userFollowers?.find(follower => follower.userId === userData?.userId);
+    return followData?.followId;
   }
 
   return (
@@ -89,13 +109,21 @@ function ProfilePage({ userData }) {
             </div>
             <div className='ProfilePage-UserFullNameContainer'>
               <p className='heading-3 ProfilePage-UserFullName'>{userProfileData.fullname}</p>
-                {userId === userData.userId ? (
-                  <IconButton icon={faPen} className='ProfilePage-Action' onClick={() => {navigate('/EditProfile')}}/>
-                ) : IsAlreadyFollowed() ? (
-                  <IconButton icon={faUserPlus} className='ProfilePage-Action' onClick={()=>{}}/>
-                ) : (
-                  <IconButton icon={faUserPlus} className='ProfilePage-Action' onClick={OnFollowClicked}/>
-                )}
+              {
+                userId === userData.userId 
+                ? (
+                    <IconButton icon={faPen} className='ProfilePage-Action' onClick={() => {navigate('/EditProfile')}}/>
+                  )
+                : (
+                    IsAlreadyFollowed() 
+                    ? (
+                        <IconButton icon={faUserCheck} className='ProfilePage-Action' onClick={OnUnfollowClicked}/>
+                      )
+                    : (
+                        <IconButton icon={faUserPlus} className='ProfilePage-Action' onClick={OnFollowClicked}/>
+                      )
+                  )
+              }
             </div>
             <div className='ProfilePage-UserInformationContainer'>
               <p className='paragraph-1 ProfilePage-UserMajor'>{userProfileData.major}</p>

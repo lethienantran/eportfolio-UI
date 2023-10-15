@@ -40,6 +40,10 @@ function EditProjectPostPage({userData}) {
   //populate
   const [projectInformation, setProjectInformation] = useState ({});
   
+  const NavigateProfile = (userId) => {
+    navigate('/Profile', {state: {userId}})
+  }
+
   const OnDelete = () => {
     axios
       .delete(`/api/project/${projectId}/information/${userData.userId}`, {
@@ -48,7 +52,7 @@ function EditProjectPostPage({userData}) {
         },
       })
       .then(response => {
-        navigate('/Profile');
+        NavigateProfile(userData?.userId);
       })
       .catch(error => {
         setIsError(true);
