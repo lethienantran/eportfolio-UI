@@ -72,7 +72,7 @@ function ProfilePage({ userData }) {
             <UserStatsButton StatsCounter={userProfileData.collaborateProjects?.length || 0} StatsTitle={'Collaborations'} onClick={OnCollaborationsClicked} />
             <UserStatsButton StatsCounter={userProfileData.userFollowers?.length || 0} StatsTitle={'Followers'} onClick={()=>{}} />
           </div>
-          <ProjectList className='ProfilePage-ProjectListContainer' ProjectListsData={userProfileData.personalProjects}/>
+          <ProjectList className='ProfilePage-ProjectListContainer' ProjectListsData={projectListsData}/>
         </div>
       </div>
     </div>
