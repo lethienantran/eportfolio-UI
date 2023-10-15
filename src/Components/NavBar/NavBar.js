@@ -15,9 +15,39 @@ import { useNavigate } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+import SearchBox from '../InputFields/SearchBox/SearchBox';
+
 function NavBar({ userData }) {
 
   const navigate = useNavigate();
+
+  const [searchInformation, setSearchInformation] = useState({
+    searchUsername: '',
+  });
+
+  const OnSearch = (e) => {
+    if (e.key === 'Enter') {
+      axios.get(`/api/users/search?username=${searchInformation?.searchUsername}`)
+        .then(response => {
+          if (response.data.responseObject.length > 0) {
+            const userId = response.data.responseObject[0].userId;
+            navigate('/Profile', {state: { userId }});
+          } else {
+            // Handle user not found, maybe show an alert or a message
+            console.log("User not found");
+          }
+        });
+    }
+  }
+
+  const HandleSearchInput = (propertyName, inputValue) => {
+    setSearchInformation({...searchInformation, [propertyName]: inputValue});
+  }
+
+  const NavigateProfile = (userId) => {
+    navigate('/Profile', {state: { userId }});
+  }
 
   const OnSignOut = () => {
     navigate('/');
@@ -28,20 +58,18 @@ function NavBar({ userData }) {
         <div className='NavBar-TopContainer'>
           <div className='NavBar-UserProfileContainer'>
             <div className='NavBar-UserAvatarContainer'>
-              <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar' userAvatar={userData?.userImage?.photoEncode64}/>
+              <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar' userAvatar={userData?.userImage?.photoEncode64} onClick={()=>{NavigateProfile(userData?.userId)}}/>
             </div>
             <div className='NavBar-UserInformationContainer'>
               <p className='heading-3 NavBar-UserName'>{userData?.fullname}</p>
               <p className='paragraph-2 NavBar-UserMajor'>{userData?.major}</p>
             </div>
           </div>
-          <div className='NavBar-SearchBoxContainer'>
-            <FontAwesomeIcon icon={faSearch} className="NavBar-SearchIcon" />
-            <input type='text' placeholder='Search other profiles...' className='NavBar-SearchBox'/>
-          </div>
+          <SearchBox name='searchUsername' onChange={HandleSearchInput}placeholder='Search others by usernames...'
+          onKeyPress={OnSearch}/>
           <NavBarButton icon={faSquarePlus} title='Post Project' onClick={()=> {navigate('/PostProject')}}/>
           {/*<NavBarButton icon={faBell} title='Notifications'onClick={()=>{Navigate('/PostProject')}}/>*/}
-          <NavBarButton icon={faIdBadge} title='Profile' onClick={()=>{navigate('/Profile')}}/>
+          <NavBarButton icon={faIdBadge} title='Profile' onClick={()=>{NavigateProfile(userData.userId)}}/>
         </div>
         <div className='NavBar-BottomContainer'>
           <div className='NavBar-LogoContainer'>

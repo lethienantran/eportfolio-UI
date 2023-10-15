@@ -3,4 +3,5 @@ export const API = {
     signInURL: '/api/authentication/sign-in',
     signUpURL: '/api/authentication/sign-up',
     editUserInformationURL: '/api/users/information',
+    followURL: '/api/follow/new',
 }

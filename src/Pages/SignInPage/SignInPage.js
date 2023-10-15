@@ -54,8 +54,9 @@ function SignInPage() {
         })
         .then(response => {
           const userData = response.data.responseObject;
+          const userId = userData.userId;
           dispatch(setUserData(userData));
-          navigate('/Profile');
+          navigate('/Profile', {state: {userId}});
         })
         .catch(error => {
           setIsError(true);

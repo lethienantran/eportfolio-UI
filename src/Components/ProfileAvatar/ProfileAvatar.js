@@ -11,10 +11,6 @@ function ProfileAvatar(props) {
   const defaultClassName = `${props.defaultClassName} ProfileAvatar-Default`  
   
   const { userAvatar } = props;
-  
-  useEffect(() => {
-    
-  }, []);
 
   return (
     <>
