@@ -23,6 +23,12 @@
     margin-bottom: calc(3.35vmin); /* 32px */
 }
 
+.NavBar-UserAvatarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .NavBar-UserAvatar {
     width: calc(6.7vmin); /* 64px */
     height: calc(6.7vmin); /* 64px */

@@ -18,13 +18,13 @@ function App() {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/SignIn" element={<SignInPage />} />
+          <Route path="/" element={<SignInPage />} />
           <Route path="/SignUp" element={<SignUpPage />} />
           <Route path="/Profile" element={<ProfilePage />} />
           <Route path="/EditProfile" element={<EditProfilePage />} />
           <Route path="/PostProject" element={<PostProjectPage/>} />
-          <Route path="/Project" elemtent={<ProjectPostPage/>} />
-          <Route path="/" element={<EditProjectPostPage/>} />
+          <Route path="/Project" element={<ProjectPostPage/>} />
+          <Route path="/EditProject" element={<EditProjectPostPage/>} />
         </Routes>
       </Suspense>
     </Router>

@@ -5,6 +5,8 @@ import './ProfileAvatar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
+import Avatar_Placeholder from '../../Assets/Images/Avatar_WalkerTran.JPG'
+
 function ProfileAvatar(props) {
 
   const userClassName = `${props.userClassName} ProfileAvatar-User`;
@@ -16,14 +18,18 @@ function ProfileAvatar(props) {
     <>
         {userAvatarBase64 ? 
         (<>
-          <img src={`data:image/jpeg;base64,${userAvatarBase64}
+          <button className='ProfileAvatar-Container'>
+            <img src={`data:image/jpeg;base64,${userAvatarBase64}
 `} alt='User Avatar'className={userClassName} />
+          </button>
       </>)
       : (
         <>
-          <div className={defaultClassName}>
-            <FontAwesomeIcon icon={faUser} />
-          </div>
+          <button className='ProfileAvatar-Container'>
+            <div className={defaultClassName}>
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+          </button>
         </>
       )}
     </>
