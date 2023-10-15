@@ -4,11 +4,11 @@ import './ProfilePage.css';
 import NavBar from '../../Components/NavBar/NavBar';
 import ProfileAvatar from '../../Components/ProfileAvatar/ProfileAvatar';
 import IconButton from '../../Components/Buttons/IconButton/IconButton';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import UserStatsButton from '../../Components/Buttons/UserStatsButton/UserStatsButton';
 
 import ProjectList from '../../Components/Lists/ProjectList';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux'
 import axios from 'axios';
 import { API } from '../../Constants';
@@ -16,8 +16,10 @@ import { API } from '../../Constants';
 function ProfilePage({ userData }) {
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.state?.userId;
 
-  const apiURL = `/api/users/${userData.userId}/information`;
+  const apiURL = `/api/users/${userId}/information`;
 
   const [userProfileData, setUserProfileData] = useState({});
 
@@ -31,6 +33,29 @@ function ProfilePage({ userData }) {
     setProjectListsData(userProfileData.personalProjects);
   }
 
+  const OnFollowClicked = () => {
+    const requestBody = {
+      userId: userData.userId,
+      userBeingFollowedId: userId,
+    }
+    axios
+      .post(API.followURL, requestBody, {
+        headers: {
+          'X-API-KEY': API.key,
+        }
+      })
+      .then(response => {
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  const OnUnfollowClicked = () => {
+
+  }
+
   useEffect(()=> {
     axios
       .get(apiURL, {
@@ -41,12 +66,17 @@ function ProfilePage({ userData }) {
       .then(response => {
         const JSONFormat = JSON.stringify(response.data.responseObject);
         setUserProfileData(JSON.parse(JSONFormat));
+        console.log(userProfileData);
       })
   }, [apiURL]);
 
   useEffect(()=> {
     setProjectListsData(userProfileData.personalProjects);
   }, [userProfileData]);
+
+  const IsAlreadyFollowed = () => {
+    return userProfileData.userFollowers.some(follower => follower.userId === userData?.userId);
+  }
 
   return (
     <div className='wrapper ProfilePage-Wrapper'>
@@ -59,7 +89,13 @@ function ProfilePage({ userData }) {
             </div>
             <div className='ProfilePage-UserFullNameContainer'>
               <p className='heading-3 ProfilePage-UserFullName'>{userProfileData.fullname}</p>
-              <IconButton icon={faPen} className='ProfilePage-EditProfile' onClick={() => {navigate('/EditProfile')}}/>
+                {userId === userData.userId ? (
+                  <IconButton icon={faPen} className='ProfilePage-Action' onClick={() => {navigate('/EditProfile')}}/>
+                ) : IsAlreadyFollowed() ? (
+                  <IconButton icon={faUserPlus} className='ProfilePage-Action' onClick={()=>{}}/>
+                ) : (
+                  <IconButton icon={faUserPlus} className='ProfilePage-Action' onClick={OnFollowClicked}/>
+                )}
             </div>
             <div className='ProfilePage-UserInformationContainer'>
               <p className='paragraph-1 ProfilePage-UserMajor'>{userProfileData.major}</p>

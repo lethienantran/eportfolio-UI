@@ -62,7 +62,7 @@
     overflow: hidden;
 }
 
-.ProfilePage-EditProfile {
+.ProfilePage-Action {
     font-size: calc(2.1vmin); 
     margin-left: calc(1.25vmin); /* 12px */
 }

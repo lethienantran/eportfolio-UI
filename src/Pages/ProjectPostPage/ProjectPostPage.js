@@ -24,8 +24,8 @@ function ProjectPostPage({ userData }) {
   const [projectInformation, setProjectInformation] = useState({});
   const [projectCreationDays, setProjectCreationDays] = useState();
 
-  const OnNavigateProfile = () => {
-    navigate('/Profile');
+  const OnNavigateProfile = (userId) => {
+    navigate('/Profile',  {state: {userId}});
   }
 
   const OnEditProjectPost = (projectId) => {
@@ -64,7 +64,7 @@ function ProjectPostPage({ userData }) {
         <div className='ProjectPostPage-Content'>
           <div className='ProjectPostPage-PostHeader'>
             <div className='ProjectPostPage-AuthorInformationContainer'>
-              <ProfileAvatar userClassName='ProjectPostPage-UserAvatar' defaultClassName='ProjectPostPage-DefaultUserAvatar' onClick={OnNavigateProfile} userAvatar={projectInformation?.projectOwner?.userImage?.photoEncode64}/>
+              <ProfileAvatar userClassName='ProjectPostPage-UserAvatar' defaultClassName='ProjectPostPage-DefaultUserAvatar' onClick={()=> {OnNavigateProfile(projectInformation?.projectOwner?.userId)}} userAvatar={projectInformation?.projectOwner?.userImage?.photoEncode64}/>
               <div className='ProjectPostPage-AuthorInformation'>
                 <p className='heading-3 ProjectPostPage-AuthorName'>{projectInformation?.projectOwner?.fullname}</p>
                 <p className='paragraph-1 ProjectPostPage-PostedDate'>{projectCreationDays} days ago</p>
