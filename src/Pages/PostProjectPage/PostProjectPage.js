@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "./PostProjectPage.css";
 import axios from "axios";
 import StandardDropDown from "../../Components/DropDowns/StandardDropDown/StandardDropDown";
-
+import { API } from "../../Constants";
 import NavBar from "../../Components/NavBar/NavBar";
 import IconButton from "../../Components/Buttons/IconButton/IconButton";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
@@ -86,8 +86,8 @@ function PostProjectPage({ userData }) {
   };
 
   const NavigateProfile = (userId) => {
-    navigate('/Profile', {state: {userId}})
-  }
+    navigate("/Profile", { state: { userId } });
+  };
 
   const handlePostButtonClick = () => {
     // Prepare the request body
@@ -103,7 +103,11 @@ function PostProjectPage({ userData }) {
     console.log(requestBody);
     // Make the API POST request using Axios
     axios
-      .post("/api/project/upload", requestBody)
+      .post("/api/project/upload", requestBody, {
+        headers: {
+          "X-API-KEY": API.key,
+        },
+      })
       .then((response) => {
         // Handle the response from the API, e.g., show a success message or perform further actions
         console.log(requestBody);

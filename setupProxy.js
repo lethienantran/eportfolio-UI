@@ -1,10 +1,11 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.use(
-    '/api',
+    "/api",
     createProxyMiddleware({
-      target: 'http://locahost:5000',
+      target:
+        "https://bvyhgijzjg.execute-api.us-west-2.amazonaws.com/EP_API_PROD",
       changeOrigin: true,
     })
   );
