@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './ProfileAvatar.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
-import Avatar_Placeholder from '../../Assets/Images/Avatar_WalkerTran.JPG'
-
 function ProfileAvatar(props) {
 
   const userClassName = `${props.userClassName} ProfileAvatar-User`;
   const defaultClassName = `${props.defaultClassName} ProfileAvatar-Default`  
-
-  const userAvatarBase64 = props.userAvatarBase64;
   
+  const { userAvatar } = props;
+  
+  useEffect(() => {
+    
+  }, []);
+
   return (
     <>
-        {userAvatarBase64 ? 
+        {userAvatar ? 
         (<>
           <button className='ProfileAvatar-Container' onClick={props.onClick}>
-            <img src={userAvatarBase64} alt='User Avatar'className={userClassName} />
+            <img src={userAvatar} alt='User Avatar'className={userClassName} />
           </button>
       </>)
       : (

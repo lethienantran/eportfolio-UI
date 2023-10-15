@@ -21,7 +21,6 @@
 .ProjectPostPage-PostHeader {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: calc(1.65vmin);
 }
@@ -30,7 +29,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: calc(45.8vmin); /* 436px */
+    width: calc(46.5vmin); /* 436px */
     margin-right: calc(2.5vmin);
 }
 
@@ -65,8 +64,8 @@
     text-overflow: ellipsis;
 }
 
-.ProjectPostPage-Love {
-    font-size: calc(3.35vmin);
+.ProjectPostPage-Action {
+    font-size: calc(2.5vmin);
 }
 
 .ProjectPostPage-PostBannerContainer {

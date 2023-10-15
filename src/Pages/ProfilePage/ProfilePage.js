@@ -42,7 +42,7 @@ function ProfilePage({ userData }) {
         const JSONFormat = JSON.stringify(response.data.responseObject);
         setUserProfileData(JSON.parse(JSONFormat));
       })
-  }, [apiURL])
+  }, [apiURL]);
 
   useEffect(()=> {
     setProjectListsData(userProfileData.personalProjects);
@@ -50,13 +50,12 @@ function ProfilePage({ userData }) {
 
   return (
     <div className='wrapper ProfilePage-Wrapper'>
-      <NavBar userFullName={userData.fullname}
-              userMajor={userData.major} />
+      <NavBar />
       <div className='ProfilePage-ContentContainer'>
         <div className='ProfilePage-Content'>
           <div className='ProfilePage-ProfileHeader'>
             <div className='ProfilePage-UserAvatarContainer'>
-              <ProfileAvatar userClassName='ProfilePage-UserAvatar' defaultClassName='ProfilePage-DefaultUserAvatar' />
+              <ProfileAvatar userClassName='ProfilePage-UserAvatar' defaultClassName='ProfilePage-DefaultUserAvatar' userAvatar={userProfileData?.userImage?.photoEncode64}/>
             </div>
             <div className='ProfilePage-UserFullNameContainer'>
               <p className='heading-3 ProfilePage-UserFullName'>{userProfileData.fullname}</p>

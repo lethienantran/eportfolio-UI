@@ -28,7 +28,7 @@ function NavBar({ userData }) {
         <div className='NavBar-TopContainer'>
           <div className='NavBar-UserProfileContainer'>
             <div className='NavBar-UserAvatarContainer'>
-              <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar'/>
+              <ProfileAvatar userClassName='NavBar-UserAvatar' defaultClassName='NavBar-DefaultUserAvatar' userAvatar={userData?.userImage?.photoEncode64}/>
             </div>
             <div className='NavBar-UserInformationContainer'>
               <p className='heading-3 NavBar-UserName'>{userData?.fullname}</p>

@@ -17,7 +17,7 @@ function EditProfilePage({ userData }) {
   const fileInputRef = useRef(null);
   const [imageOGWidth, setImageOGWidth] = useState(null);
   const [imageOGHeight, setImageOGHeight] = useState(null);
-  const [userAvatarBase64, setUserAvatarBase64] = useState(null);
+  const [userAvatarBase64, setUserAvatarBase64] = useState(userData?.userImage?.photoEncode64);
 
   const maxWidth = 240; 
   const maxHeight = 240; 
@@ -123,7 +123,9 @@ function EditProfilePage({ userData }) {
             fullname: requestBody.fullname,
             major: requestBody.major,
             school: requestBody.school,
-            userImage: requestBody.encodePhoto,
+            userImage: {
+              photoEncode64: requestBody.encodePhoto,
+            },
             email: requestBody.email,
             username: userData.username,
           }
@@ -156,7 +158,7 @@ function EditProfilePage({ userData }) {
           <p className='heading-1 EditProfilePage-Title'>Edit Profile</p>
           <div className='EditProfilePage-UserAvatarContainer'>
             <label className="EditProfilePage-UserAvatarContainer" onClick={OpenFileDialog}>
-              <ProfileAvatar userClassName='EditProfilePage-UserAvatar' defaultClassName='EditProfilePage-DefaultUserAvatar' userAvatarBase64={userAvatarBase64}/>
+              <ProfileAvatar userClassName='EditProfilePage-UserAvatar' defaultClassName='EditProfilePage-DefaultUserAvatar' userAvatar={userAvatarBase64}/>
               <input
                 type="file"
                 accept="image/*"
