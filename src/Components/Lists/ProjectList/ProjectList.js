@@ -12,6 +12,7 @@ function ProjectList(props) {
         <ProjectCard onClick={()=>{}}/>
         <ProjectCard onClick={()=>{}}/>
         <ProjectCard onClick={()=>{}}/>
+        <ProjectCard onClick={()=>{}}/>
     </div>
   )
 }

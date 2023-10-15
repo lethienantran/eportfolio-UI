@@ -20,11 +20,11 @@ function App() {
         <Routes>
           <Route path="/SignIn" element={<SignInPage />} />
           <Route path="/SignUp" element={<SignUpPage />} />
-          <Route path="/" element={<ProfilePage />} />
+          <Route path="/Profile" element={<ProfilePage />} />
           <Route path="/EditProfile" element={<EditProfilePage />} />
           <Route path="/PostProject" element={<PostProjectPage/>} />
           <Route path="/Project" elemtent={<ProjectPostPage/>} />
-          <Route path="/EditProject" element={<EditProjectPostPage/>} />
+          <Route path="/" element={<EditProjectPostPage/>} />
         </Routes>
       </Suspense>
     </Router>

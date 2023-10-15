@@ -7,7 +7,6 @@ import IconButton from '../../Components/Buttons/IconButton/IconButton';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import UserStatsButton from '../../Components/Buttons/UserStatsButton/UserStatsButton';
 
-import Project_PlaceHolder from '../../Assets/Images/Project_TheOuterBase.png';
 import ProjectList from '../../Components/Lists/ProjectList';
 
 function ProfilePage() {

@@ -12,7 +12,7 @@
 }
 
 .ProfilePage-Content {
-    width: calc(53vmin); /* 592px */
+    width: calc(53vmin);
     display:flex;
     flex-direction: column;
 }
