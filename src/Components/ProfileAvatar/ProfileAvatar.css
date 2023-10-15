@@ -3,6 +3,10 @@
     background: transparent;
 }
 
+.ProfileAvatar-Container:hover {
+    cursor: pointer;
+}
+
 .ProfileAvatar-User {
     display: block;
     margin: 0px;

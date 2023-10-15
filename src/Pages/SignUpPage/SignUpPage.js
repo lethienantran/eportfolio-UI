@@ -5,9 +5,20 @@ import StandardTextButton from '../../Components/Buttons/StandardTextButton/Stan
 import StandardButton from '../../Components/Buttons/StandardButton/StandardButton';
 
 import './SignUpPage.css';
-
+import { useNavigate } from 'react-router-dom';
 
 function SignUpPage() {
+
+  const navigate = useNavigate();
+  
+  const NavigateSignIn = () => {
+    navigate('/');
+  }
+
+  const OnSignUp = () => {
+    
+  }
+
   return (
     <div className='wrapper SignUpPage-Wrapper'>
       <div className='SignUpPage-FormContainer'>
@@ -25,9 +36,9 @@ function SignUpPage() {
         </div>
         <div className='SignUpPage-PromptContainer'>
           <p className='paragraph-2'>Already have an account?</p>
-          <StandardTextButton text='Sign In' onClick={()=>{}}/>
+          <StandardTextButton text='Sign In' onClick={NavigateSignIn}/>
         </div>
-        <StandardButton title='Sign Up' onClick={()=>{}}/>
+        <StandardButton title='Sign Up' onClick={OnSignUp}/>
       </div>
     </div>
   )

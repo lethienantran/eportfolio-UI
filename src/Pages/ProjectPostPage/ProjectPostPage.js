@@ -7,8 +7,16 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 import Project_PlaceHolder from '../../Assets/Images/Project_TheOuterBase.png';
 import CollaboratorList from '../../Components/Lists/CollaboratorList/CollaboratorList';
+import { useNavigate } from 'react-router-dom';
 
 function ProjectPostPage() {
+
+  const navigate = useNavigate();
+  
+  const OnNavigateProfile = () => {
+    navigate('/Profile');
+  }
+
   return (
     <div className='wrapper ProjectPostPage-Wrapper'>
       <NavBar />
@@ -16,7 +24,7 @@ function ProjectPostPage() {
         <div className='ProjectPostPage-Content'>
           <div className='ProjectPostPage-PostHeader'>
             <div className='ProjectPostPage-AuthorInformationContainer'>
-              <ProfileAvatar userClassName='ProjectPostPage-UserAvatar' defaultClassName='ProjectPostPage-DefaultUserAvatar' />
+              <ProfileAvatar userClassName='ProjectPostPage-UserAvatar' defaultClassName='ProjectPostPage-DefaultUserAvatar' onClick={OnNavigateProfile}/>
               <div className='ProjectPostPage-AuthorInformation'>
                 <p className='heading-3 ProjectPostPage-AuthorName'>Walker Tran</p>
                 <p className='paragraph-1 ProjectPostPage-PostedDate'>2 days ago</p>

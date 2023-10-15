@@ -18,14 +18,14 @@ function ProfileAvatar(props) {
     <>
         {userAvatarBase64 ? 
         (<>
-          <button className='ProfileAvatar-Container'>
+          <button className='ProfileAvatar-Container' onClick={props.onClick}>
             <img src={`data:image/jpeg;base64,${userAvatarBase64}
 `} alt='User Avatar'className={userClassName} />
           </button>
       </>)
       : (
         <>
-          <button className='ProfileAvatar-Container'>
+          <button className='ProfileAvatar-Container' onClick={props.onClick}>
             <div className={defaultClassName}>
               <FontAwesomeIcon icon={faUser} />
             </div>

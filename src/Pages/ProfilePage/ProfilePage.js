@@ -8,8 +8,19 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import UserStatsButton from '../../Components/Buttons/UserStatsButton/UserStatsButton';
 
 import ProjectList from '../../Components/Lists/ProjectList';
+import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
+
+  const navigate = useNavigate();
+
+  const OnProjectsClicked = () => {
+
+  }
+
+  const OnCollaborationsClicked = () => {
+
+  }
 
   return (
     <div className='wrapper ProfilePage-Wrapper'>
@@ -22,7 +33,7 @@ function ProfilePage() {
             </div>
             <div className='ProfilePage-UserFullNameContainer'>
               <p className='heading-3 ProfilePage-UserFullName'>Walker Tran</p>
-              <IconButton icon={faPen} className='ProfilePage-EditProfile'/>
+              <IconButton icon={faPen} className='ProfilePage-EditProfile' onClick={() => {navigate('/EditProfile')}}/>
             </div>
             <div className='ProfilePage-UserInformationContainer'>
               <p className='paragraph-1 ProfilePage-UserMajor'>Computer Science</p>
@@ -30,8 +41,8 @@ function ProfilePage() {
             </div>
           </div>
           <div className='ProfilePage-ProfileSocialStats'>
-            <UserStatsButton StatsCounter={6} StatsTitle={'Projects'} onClick={()=>{}} />
-            <UserStatsButton StatsCounter={2} StatsTitle={'Collaborations'} onClick={()=>{}} />
+            <UserStatsButton StatsCounter={6} StatsTitle={'Projects'} onClick={OnProjectsClicked} />
+            <UserStatsButton StatsCounter={2} StatsTitle={'Collaborations'} onClick={OnCollaborationsClicked} />
             <UserStatsButton StatsCounter={8} StatsTitle={'Followers'} onClick={()=>{}} />
           </div>
           <ProjectList className='ProfilePage-ProjectListContainer'/>

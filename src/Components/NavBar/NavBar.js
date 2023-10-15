@@ -11,8 +11,16 @@ import { faBell, faIdBadge, faSquarePlus } from '@fortawesome/free-regular-svg-i
 import NavBarButton from '../Buttons/NavBarButton/NavBarButton';
 import IconButton from '../Buttons/IconButton/IconButton';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar(props) {
+
+  const navigate = useNavigate();
+
+  const OnSignOut = () => {
+    navigate('/');
+  }
+
   return (
     <div className='NavBar-Container'>
         <div className='NavBar-TopContainer'>
@@ -29,16 +37,16 @@ function NavBar(props) {
             <FontAwesomeIcon icon={faSearch} className="NavBar-SearchIcon" />
             <input type='text' placeholder='Search other profiles...' className='NavBar-SearchBox'/>
           </div>
-          <NavBarButton icon={faSquarePlus} title='Post Project' onClick={()=>{}}/>
-          <NavBarButton icon={faBell} title='Notifications'onClick={()=>{}}/>
-          <NavBarButton icon={faIdBadge} title='Profile' onClick={()=>{}}/>
+          <NavBarButton icon={faSquarePlus} title='Post Project' onClick={()=> {navigate('/PostProject')}}/>
+          {/*<NavBarButton icon={faBell} title='Notifications'onClick={()=>{Navigate('/PostProject')}}/>*/}
+          <NavBarButton icon={faIdBadge} title='Profile' onClick={()=>{navigate('/Profile')}}/>
         </div>
         <div className='NavBar-BottomContainer'>
           <div className='NavBar-LogoContainer'>
             <Logo className='NavBar-Logo'/>
             <p className='paragraph-2'><em>"Projects by Peers, Passion in Progress."</em></p>
           </div>
-          <IconButton icon={faArrowRightFromBracket} className='NavBar-SignOut'/>
+          <IconButton icon={faArrowRightFromBracket} className='NavBar-SignOut' onClick={OnSignOut}/>
         </div>
     </div>
   )

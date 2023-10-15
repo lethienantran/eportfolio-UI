@@ -6,7 +6,16 @@ import ProfileAvatar from '../../Components/ProfileAvatar/ProfileAvatar';
 import StandardTextInputField from '../../Components/InputFields/StandardTextInputField';
 import StandardButton from '../../Components/Buttons/StandardButton/StandardButton';
 
+import { useNavigate } from 'react-router-dom';
+
 function EditProfilePage() {
+
+  const navigate = useNavigate();
+
+  const OnUpdate = () => {
+    navigate('/Profile');
+  }
+
   return (
     <div className='wrapper EditProfilePage-Wrapper'>
       <NavBar />
@@ -22,7 +31,7 @@ function EditProfilePage() {
             <StandardTextInputField placeholder='School/University'/>
             <StandardTextInputField placeholder='Email Address'/>
           </div>
-          <StandardButton title='Update' onClick={()=>{}}/>
+          <StandardButton title='Update' onClick={OnUpdate}/>
         </div>
       </div>
     </div>
