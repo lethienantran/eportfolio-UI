@@ -1,10 +1,2 @@
 [build]
     publish = "build/"
-
-[[redirects]]
-  from = "/api/sign-up"
-  to = "https://bvyhgijzjg.execute-api.us-west-2.amazonaws.com/EP_API_PROD/api/sign-up"
-  status = 200
-  force = true # COMMENT: ensure that we always redirect
-  headers = {X-From = "Netlify"}
-  signed = "JZD1zC0efO7rnomTaNr8f1aoL6WRup5z4BmOEWut"
