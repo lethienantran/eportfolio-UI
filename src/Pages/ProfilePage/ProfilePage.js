@@ -19,7 +19,7 @@ function ProfilePage({ userData }) {
   const location = useLocation();
   const userId = location.state?.userId;
 
-  const apiURL = `/api/users/${userId}/information`;
+  const apiURL = `${API.apiDomain}/api/users/${userId}/information`;
 
   const [userProfileData, setUserProfileData] = useState({});
 
@@ -39,7 +39,7 @@ function ProfilePage({ userData }) {
       userBeingFollowedId: userId,
     }
     axios
-      .post(API.followURL, requestBody, {
+      .post(`${API.apiDomain}/api/follow/new`, requestBody, {
         headers: {
           'X-API-KEY': API.key,
         }
@@ -59,7 +59,7 @@ function ProfilePage({ userData }) {
       return;
     }
     axios
-      .delete(`/api/follow/${followId}/unfollow`, {
+      .delete(`${API.apiDomain}/api/follow/${followId}/unfollow`, {
         headers: {
           'X-API-KEY': API.key,
         }

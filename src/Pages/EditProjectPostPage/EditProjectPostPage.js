@@ -27,7 +27,7 @@ function EditProjectPostPage({userData}) {
   const maxWidth = 240; 
   const maxHeight = 240; 
 
-  const apiURL = `/api/project/${projectId}/information`;
+  const apiURL = `${API.apiDomain}/api/project/${projectId}/information`;
 
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ function EditProjectPostPage({userData}) {
 
   const OnDelete = () => {
     axios
-      .delete(`/api/project/${projectId}/information/${userData.userId}`, {
+      .delete(`${API.apiDomain}/api/project/${projectId}/information/${userData.userId}`, {
         headers: {
           'X-API-KEY': API.key,
         },

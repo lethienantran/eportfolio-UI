@@ -18,7 +18,7 @@ function StandardDropDown(props) {
   const handleInputKeyDown = (e) => {
     if (e.key === "Enter" && inputValue) {
       e.preventDefault();
-      const apiURL = `/api/users/search?username=${inputValue}`;
+      const apiURL = `${API.apiDomain}/api/users/search?username=${inputValue}`;
       axios
         .get(apiURL, {
           headers: {

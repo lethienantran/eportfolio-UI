@@ -103,7 +103,7 @@ function PostProjectPage({ userData }) {
     console.log(requestBody);
     // Make the API POST request using Axios
     axios
-      .post("/api/project/upload", requestBody, {
+      .post(`${API.apiDomain}/api/project/upload`, requestBody, {
         headers: {
           "X-API-KEY": API.key,
         },

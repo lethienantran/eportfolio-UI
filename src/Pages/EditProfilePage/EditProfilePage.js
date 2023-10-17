@@ -112,7 +112,7 @@ function EditProfilePage({ userData }) {
       };
       console.log(requestBody);
       axios
-        .put(API.editUserInformationURL, requestBody, {
+        .put(`${API.apiDomain}/api/users/information`, requestBody, {
           headers: {
             'X-API-KEY': API.key,
           },

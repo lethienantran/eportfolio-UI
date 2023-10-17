@@ -47,7 +47,7 @@ function SignInPage() {
   const OnSignIn = () => {
     if(IsValid()){
       axios
-        .post(API.signInURL, requestBody, {
+        .post(`${API.apiDomain}/api/authentication/sign-in`, requestBody, {
           headers: {
             'X-API-KEY': API.key,
           },

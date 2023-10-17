@@ -19,7 +19,7 @@ function ProjectPostPage({ userData }) {
   const location = useLocation();
   const projectId = location.state?.projectId;
 
-  const apiURL = `/api/project/${projectId}/information`;
+  const apiURL = `${API.apiDomain}/api/project/${projectId}/information`;
 
   const [projectInformation, setProjectInformation] = useState({});
   const [projectCreationDays, setProjectCreationDays] = useState();

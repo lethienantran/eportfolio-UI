@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 
 import axios from 'axios';
 import SearchBox from '../InputFields/SearchBox/SearchBox';
+import { API } from '../../Constants';
 
 function NavBar({ userData }) {
 
@@ -28,7 +29,7 @@ function NavBar({ userData }) {
 
   const OnSearch = (e) => {
     if (e.key === 'Enter') {
-      axios.get(`/api/users/search?username=${searchInformation?.searchUsername}`)
+      axios.get(`${API.apiDomain}/api/users/search?username=${searchInformation?.searchUsername}`)
         .then(response => {
           if (response.data.responseObject.length > 0) {
             const userId = response.data.responseObject[0].userId;
